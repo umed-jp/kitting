@@ -110,9 +110,13 @@ function Install-Software {
 # Function: Install Slack
 function Install-Slack {
     Write-Host "Installing Slack..."
-    $slackUrl = "https://downloads.slack-edge.com/releases_x64/SlackSetup.exe"
-    $slackInstaller = "$env:TEMP\SlackSetup.exe"
-    Install-Software -DownloadUrl $slackUrl -InstallerPath $slackInstaller -Arguments "/S"
+    $downloadUrl = "https://slack.com/downloads/instructions/windows?ddl=1&build=win64"
+    $outputFile = "$env:USERPROFILE\Downloads\SlackSetup.exe"
+    Invoke-WebRequest -Uri $downloadUrl -OutFile $outputFile
+
+    Start-Process -FilePath "$env:USERPROFILE\Downloads\SlackSetup.exe"
+    Remove-Item -Path "$env:USERPROFILE\Downloads\SlackSetup.exe"
+    Write-Host "Finish Slack installation"
 }
 
 # Function: Install Chrome
@@ -279,7 +283,7 @@ function Add-Bookmarks {
 Write-Host "Starting kitting process..."
 
 # Step1: Update Windows
-Update-Windows
+# Update-Windows
 
 # Step2: Clean up unnecessary apps
 Remove-UnnecessaryApps
@@ -302,4 +306,4 @@ Remove-StartupApps
 Add-Bookmarks
 
 Write-Host "Kitting process completed successfully."
-
+Restart-Computer -Force
