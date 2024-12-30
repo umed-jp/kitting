@@ -251,19 +251,14 @@ function Add-Bookmarks {
     if (Test-Path $bookmarksFilePath) {
     # Read the existing Bookmarks JSON
         $bookmarksJson = Get-Content $bookmarksFilePath -Raw | ConvertFrom-Json
-
-        # Define new bookmarks to add
         $newBookmarks = @(
-            @{
-                name = "Company Portal"
-                url = "https://portal.company.com"
-                type = "url"
-            },
-            @{
-                name = "Helpdesk"
-                url = "https://helpdesk.company.com"
-                type = "url"
-            }
+            @{ name = "クリアス"; url = "https://web.clius.jp" },
+            @{ name = "カレンダー (Google Calendar)"; url = "https://calendar.google.com" },
+            @{ name = "Notion"; url = "https://www.notion.so/umed-group/Group-All-da85f0542882403684771ab796f1ac07" },
+            @{ name = "Google Drive"; url = "https://drive.google.com" },
+            @{ name = "Microsoft MyApps"; url = "https://myapps.microsoft.com" },
+            @{ name = "Gmail"; url = "https://gmail.com" },
+            @{ name = "MCS"; url = "https://www.medical-care.net/home?restore_list=1" }
         )
 
     # Add the new bookmarks under the bookmark bar
@@ -277,7 +272,8 @@ function Add-Bookmarks {
         Write-Output "Chrome Bookmarks file not found. Please ensure Chrome is installed and initialized."
     }
 }
-    
+
+
 
 # Example Main Kitting Script
 Write-Host "Starting kitting process..."
